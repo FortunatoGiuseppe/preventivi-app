@@ -1,0 +1,19 @@
+.wrap { padding: 1rem; }
+.list { display: flex; flex-direction: column; gap: .5rem; }
+.row {
+  display: grid;
+  grid-template-columns: 1fr 160px 220px;
+  gap: .5rem;
+  align-items: center;
+  padding: .5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+.title .name { font-weight: 600; }
+.title .meta { opacity: .7; font-size: .9em; }
+.totale { text-align: right; font-weight: 600; }
+.actions { text-align: right; }
+@media (max-width: 700px) {
+  .row { grid-template-columns: 1fr; }
+  .totale, .actions { text-align: left; }
+}

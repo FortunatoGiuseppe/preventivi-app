@@ -1,0 +1,66 @@
+<div class="wrap" *ngIf="preventivo$ | async as p">
+
+  <div class="room-block" *ngFor="let s of p.stanze">
+    <h3 class="room-title">{{ s.nome }}</h3>
+
+    <div class="table" *ngIf="righeByStanza(p.righe, s.id) as righeStanza">
+      <div class="header row">
+        <div class="col desc">Descrizione</div>
+        <div class="col small">Q.tà</div>
+        <div class="col small">Prezzo</div>
+        <div class="col small">Totale</div>
+        <div class="col actions"></div>
+      </div>
+
+      <div class="row body" *ngFor="let r of righeStanza">
+        <div class="col desc">{{ r.descrizione }}</div>
+
+        <div class="col small">
+          <mat-form-field appearance="outline">
+            <input matInput type="number" min="1"
+                   [value]="r.quantita"
+                   (input)="updateQty(r, $any($event.target).valueAsNumber || 1)">
+          </mat-form-field>
+        </div>
+
+        <div class="col small">
+          <mat-form-field appearance="outline">
+            <input matInput type="number" min="0" step="0.01"
+                   [value]="r.prezzoUnitario"
+                   (input)="updatePrice(r, $any($event.target).valueAsNumber || 0)">
+          </mat-form-field>
+        </div>
+
+        <div class="col small value">
+          {{ (r.quantita * r.prezzoUnitario) | currency:'EUR':'symbol':'1.2-2' }}
+        </div>
+
+        <div class="col actions">
+          <button mat-icon-button color="warn" (click)="remove(r.id)" aria-label="Rimuovi riga">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer row" *ngIf="righeStanza.length">
+        <div class="col desc"></div>
+        <div class="col small"></div>
+        <div class="col small total-label">Subtotale</div>
+        <div class="col small total-value">
+          {{ subtotale(righeStanza) | currency:'EUR':'symbol':'1.2-2' }}
+        </div>
+        <div class="col actions"></div>
+      </div>
+
+      <div class="empty" *ngIf="!righeStanza.length">
+        Nessuna voce in questa stanza.
+      </div>
+    </div>
+  </div>
+
+  <!-- Totale Globale -->
+  <div class="grand-total" *ngIf="p.righe.length">
+    <span>Totale preventivo:</span>
+    <strong>{{ p.totale | currency:'EUR':'symbol':'1.2-2' }}</strong>
+  </div>
+</div>

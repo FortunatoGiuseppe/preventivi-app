@@ -1,0 +1,16 @@
+.layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+}
+.toolbar {
+  display: flex; gap: .5rem; align-items: center;
+  margin-bottom: .5rem; flex-wrap: wrap;
+}
+.title { flex: 1; min-width: 240px; }
+.room { width: 220px; }
+.spacer { flex: 1; }

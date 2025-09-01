@@ -1,0 +1,19 @@
+<div class="wrap">
+  <h2>I miei preventivi</h2>
+  <div class="list" *ngIf="items.length; else empty">
+    <div class="row" *ngFor="let it of items">
+      <div class="title">
+        <div class="name">{{ it.titolo }}</div>
+        <div class="meta">Ultima modifica: {{ it.updatedAt | date:'short' }}</div>
+      </div>
+      <div class="totale">€ {{ it.totale | number:'1.2-2' }}</div>
+      <div class="actions">
+        <button mat-stroked-button (click)="apri(it.id)">Apri</button>
+        <button mat-button color="warn" (click)="elimina(it.id)">Elimina</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #empty>
+    <p>Nessun preventivo salvato. Torna all’editor per crearne uno.</p>
+  </ng-template>
+</div>

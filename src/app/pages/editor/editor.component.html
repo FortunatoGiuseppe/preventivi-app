@@ -1,0 +1,45 @@
+<div class="layout" *ngIf="preventivo$ | async as p">
+  <section class="left">
+    <h3>Aggiungi nuova voce:</h3>
+    <app-suggestion-list></app-suggestion-list>
+  </section>
+
+  <section class="right">
+    <div class="toolbar">
+      <mat-form-field appearance="outline" class="title">
+        <mat-label>Titolo preventivo</mat-label>
+        <input matInput [value]="titolo" (input)="setTitolo($any($event.target).value)">
+      </mat-form-field>
+
+      <!-- SELETTORE STANZA -->
+      <mat-form-field appearance="outline" class="room">
+        <mat-label>Stanza</mat-label>
+        <mat-select [value]="p.activeStanzaId" (selectionChange)="setStanza($event.value)">
+          <mat-option *ngFor="let s of p.stanze" [value]="s.id">{{ s.nome }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-stroked-button (click)="nuovaStanza()">
+        <mat-icon>add</mat-icon> Nuova stanza
+      </button>
+
+      <button mat-button (click)="rinominaStanza(p.activeStanzaId, getNomeStanza(p))"
+              [disabled]="!p.stanze.length">
+        <mat-icon>edit</mat-icon> Rinomina
+      </button>
+
+      <button mat-button color="warn" (click)="eliminaStanza(p.activeStanzaId)"
+              [disabled]="p.stanze.length <= 1">
+        <mat-icon>delete</mat-icon> Elimina
+      </button>
+
+      <span class="spacer"></span>
+
+      <button mat-stroked-button (click)="nuovo()">Nuovo</button>
+      <button mat-raised-button color="primary" (click)="salva()">Salva</button>
+      <button mat-raised-button color="accent" (click)="esporta(p)" [disabled]="!p.righe.length">Esporta PDF</button>
+    </div>
+
+    <app-quote-table></app-quote-table>
+  </section>
+</div>

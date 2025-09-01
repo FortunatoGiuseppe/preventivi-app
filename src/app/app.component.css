@@ -1,0 +1,10 @@
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: .5rem;
+}
+.brand { font-weight: 600; }
+.spacer { flex: 1; }
+a.active { font-weight: 600; text-decoration: underline; }

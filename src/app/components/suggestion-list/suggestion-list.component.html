@@ -1,0 +1,39 @@
+<!-- Sezione aggiunta nuovo -->
+<div class="grid">
+  <mat-form-field appearance="outline">
+    <mat-label>Descrizione</mat-label>
+    <input matInput [(ngModel)]="nuovaDescrizione">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Prezzo</mat-label>
+    <input matInput type="number" [(ngModel)]="nuovoPrezzo">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="aggiungi()">Aggiungi</button>
+</div>
+
+<!-- Lista suggerimenti -->
+     <div style="max-height: 400px; overflow-y: auto;">
+
+<div class="grid">
+  <mat-card class="card" *ngFor="let s of suggerimenti$ | async">
+    <div class="row">
+      <input matInput [(ngModel)]="s.descrizione" (blur)="modifica(s)">
+      <input matInput type="number" [(ngModel)]="s.prezzoUnitario" (blur)="modifica(s)">
+      <button mat-icon-button color="warn" (click)="elimina(s.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <mat-form-field appearance="outline" class="qty">
+      <mat-label>Quantità</mat-label>
+      <input matInput type="number"
+             [value]="qty[s.id] || s.quantitaDefault"
+             (input)="updateQty(s.id, $event)">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="add(s.id, s)">Aggiungi al preventivo</button>
+  </mat-card>
+</div>
+     </div>

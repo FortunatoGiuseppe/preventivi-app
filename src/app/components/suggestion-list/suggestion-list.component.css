@@ -1,0 +1,11 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: .75rem;
+}
+.card { padding-bottom: .5rem; }
+.row { display:flex; justify-content: space-between; align-items: baseline; margin-bottom: .5rem; }
+.title { font-weight: 600; }
+.price { opacity: .8; }
+.qty {  margin-right: .5rem; }
+button { width: 100%; }
