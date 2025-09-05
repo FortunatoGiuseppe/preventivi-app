@@ -5,4 +5,6 @@ export interface RigaPreventivo {
   quantita: number;
   prezzoUnitario: number; // Euro
   totale: number;         // quantita * prezzoUnitario (calcolato)
+  note?: string;
+  showNote?: boolean;
 }

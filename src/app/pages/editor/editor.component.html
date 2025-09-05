@@ -5,6 +5,34 @@
   </section>
 
   <section class="right">
+      <!-- INTESTAZIONE -->
+  <div class="header">
+  <!-- DITTA -->
+<mat-form-field appearance="outline" class="company">
+  <mat-label>Ditta</mat-label>
+  <textarea
+    matInput
+    cdkTextareaAutosize
+    cdkAutosizeMinRows="2"
+    cdkAutosizeMaxRows="5"
+    [value]="p.ditta"
+    (input)="setDitta($any($event.target).value)">
+  </textarea>
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="client">
+  <mat-label>Cliente</mat-label>
+  <textarea
+    matInput
+    cdkTextareaAutosize
+    cdkAutosizeMinRows="2"
+    cdkAutosizeMaxRows="5"
+    [value]="p.cliente"
+    (input)="setCliente($any($event.target).value)">
+  </textarea>
+</mat-form-field>
+
+  </div>
     <div class="toolbar">
       <mat-form-field appearance="outline" class="title">
         <mat-label>Titolo preventivo</mat-label>

@@ -12,35 +12,55 @@
         <div class="col actions"></div>
       </div>
 
-      <div class="row body" *ngFor="let r of righeStanza">
-        <div class="col desc">{{ r.descrizione }}</div>
+      <ng-container *ngFor="let r of righeStanza">
+        <!-- RIGA PRINCIPALE -->
+        <div class="row body">
+          <div class="col desc">{{ r.descrizione }}</div>
 
-        <div class="col small">
-          <mat-form-field appearance="outline">
-            <input matInput type="number" min="1"
-                   [value]="r.quantita"
-                   (input)="updateQty(r, $any($event.target).valueAsNumber || 1)">
-          </mat-form-field>
+          <div class="col small">
+            <mat-form-field appearance="outline">
+              <input matInput type="number" min="1"
+                     [value]="r.quantita"
+                     (input)="updateQty(r, $any($event.target).valueAsNumber || 1)">
+            </mat-form-field>
+          </div>
+
+          <div class="col small">
+            <mat-form-field appearance="outline">
+              <input matInput type="number" min="0" step="0.01"
+                     [value]="r.prezzoUnitario"
+                     (input)="updatePrice(r, $any($event.target).valueAsNumber || 0)">
+            </mat-form-field>
+          </div>
+
+          <div class="col small value">
+            {{ (r.quantita * r.prezzoUnitario) | currency:'EUR':'symbol':'1.2-2' }}
+          </div>
+
+          <div class="col actions">
+            <button mat-icon-button color="warn" (click)="remove(r.id)" aria-label="Rimuovi riga">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+            <!-- TASTO MOSTRA/NASCONDI NOTE -->
+            <button mat-icon-button (click)="r.showNote = !r.showNote" aria-label="Mostra/Nascondi note">
+              <mat-icon>{{ r.showNote ? 'expand_less' : 'expand_more' }}</mat-icon>
+            </button>
+          </div>
         </div>
 
-        <div class="col small">
-          <mat-form-field appearance="outline">
-            <input matInput type="number" min="0" step="0.01"
-                   [value]="r.prezzoUnitario"
-                   (input)="updatePrice(r, $any($event.target).valueAsNumber || 0)">
-          </mat-form-field>
+        <!-- RIGA NOTE APPENA SOTTO -->
+        <div class="row note-row" *ngIf="r.showNote">
+          <div class="col note full-width">
+            <mat-form-field appearance="outline" class="full-width">
+<textarea matInput
+          [(ngModel)]="r.note"
+          (blur)="updateRiga(r)">
+</textarea>
+            </mat-form-field>
+          </div>
         </div>
-
-        <div class="col small value">
-          {{ (r.quantita * r.prezzoUnitario) | currency:'EUR':'symbol':'1.2-2' }}
-        </div>
-
-        <div class="col actions">
-          <button mat-icon-button color="warn" (click)="remove(r.id)" aria-label="Rimuovi riga">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </div>
+      </ng-container>
 
       <div class="footer row" *ngIf="righeStanza.length">
         <div class="col desc"></div>

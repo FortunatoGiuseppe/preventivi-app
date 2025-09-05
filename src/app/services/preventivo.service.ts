@@ -29,6 +29,8 @@ export class PreventivoService {
       totale: 0,
       createdAt: now,
       updatedAt: now,
+      ditta: '',
+      cliente: ''
     };
   }
 
@@ -36,6 +38,17 @@ export class PreventivoService {
     p.updatedAt = new Date().toISOString();
     p.totale = this.calcolaTotale(p.righe);
     this._preventivo$.next({ ...p });
+  }
+
+  // ====== Intestazione ======
+  setDitta(ditta: string) {
+    const p = { ...this._preventivo$.value, ditta };
+    this.next(p);
+  }
+
+  setCliente(cliente: string) {
+    const p = { ...this._preventivo$.value, cliente };
+    this.next(p);
   }
 
   // ====== Stanze ======
@@ -81,22 +94,22 @@ export class PreventivoService {
   }
 
   // ====== Righe ======
-  addRiga(descrizione: string, quantita: number, prezzoUnitario: number, stanzaId?: string) {
-    const p = { ...this._preventivo$.value };
-    const sid = stanzaId || p.activeStanzaId || (p.stanze[0]?.id);
-    if (!sid) return;
+addRiga(descrizione: string, quantita: number, prezzoUnitario: number, stanzaId?: string) {
+  const p = { ...this._preventivo$.value };
+  const sid = stanzaId || p.activeStanzaId || (p.stanze[0]?.id);
+  if (!sid) return;
 
-    const riga: RigaPreventivo = {
-      id: crypto.randomUUID(),
-      stanzaId: sid,
-      descrizione,
-      quantita,
-      prezzoUnitario,
-      totale: this.round2(quantita * prezzoUnitario)
-    };
-    p.righe = [...p.righe, riga];
-    this.next(p);
-  }
+  const riga: RigaPreventivo = {
+    id: crypto.randomUUID(),
+    stanzaId: sid,
+    descrizione,
+    quantita,
+    prezzoUnitario,
+    totale: this.round2(quantita * prezzoUnitario)
+  };
+  p.righe = [...p.righe, riga];
+  this.next(p);
+}
 
   updateRiga(riga: RigaPreventivo) {
     const p = { ...this._preventivo$.value };
@@ -128,7 +141,7 @@ export class PreventivoService {
 
     const idx = this.listSaved().filter(x => x.id !== p.id);
     idx.push({ id: p.id, titolo: p.titolo, updatedAt: toSave.updatedAt, totale: toSave.totale });
-    this.storage.set(this.INDEX_KEY, idx.sort((a,b) => b.updatedAt.localeCompare(a.updatedAt)));
+    this.storage.set(this.INDEX_KEY, idx.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)));
     this._preventivo$.next(toSave);
     return p.id;
   }

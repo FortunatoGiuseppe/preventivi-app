@@ -8,6 +8,9 @@ export interface Preventivo {
   stanze: Stanza[];         // <— NUOVO: elenco stanze
   activeStanzaId: string;   // <— NUOVO: stanza selezionata
 
+  ditta: string;
+  cliente: string;
+
   righe: RigaPreventivo[];
   totale: number;
 

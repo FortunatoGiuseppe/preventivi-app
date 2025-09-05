@@ -8,11 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { Observable } from 'rxjs';
 import { Preventivo } from '../../models/preventivo';
 import { RigaPreventivo } from '../../models/riga-preventivo';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-quote-table',
   standalone: true,
-  imports: [CommonModule, AsyncPipe, CurrencyPipe, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, AsyncPipe, CurrencyPipe, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule],
   templateUrl: './quote-table.component.html',
   styleUrl: './quote-table.component.css'
 })
@@ -36,4 +37,8 @@ export class QuoteTableComponent implements OnInit {
     this.prevSrv.updateRiga({ ...r, prezzoUnitario: price });
   }
   remove(id: string) { this.prevSrv.removeRiga(id); }
+
+  updateRiga(riga: RigaPreventivo) {
+  this.prevSrv.updateRiga(riga);
+}
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // <--- aggiunto
 import { QuoteTableComponent } from '../../components/quote-table/quote-table.component';
 import { PreventivoService } from '../../services/preventivo.service';
 import { PdfExportService } from '../../services/pdf-export.service';
@@ -17,7 +18,7 @@ import { SuggestionListComponent } from '../../components/suggestion-list/sugges
   selector: 'app-editor',
   standalone: true,
   imports: [
-    CommonModule, AsyncPipe,
+    CommonModule, AsyncPipe, FormsModule,
     QuoteTableComponent, SuggestionListComponent,
     MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule,
     MatSelectModule, MatIconModule
@@ -28,6 +29,8 @@ import { SuggestionListComponent } from '../../components/suggestion-list/sugges
 export class EditorComponent implements OnInit {
   preventivo$!: Observable<Preventivo>;
   titolo = '';
+  ditta = '';
+  cliente = '';
 
   constructor(
     private prevSrv: PreventivoService,
@@ -72,5 +75,14 @@ export class EditorComponent implements OnInit {
     const stanza = p.stanze.find(s => s.id === p.activeStanzaId);
     return stanza?.nome || '';
   }
-  
+  setDitta(val: string) {
+  this.ditta = val;
+  this.prevSrv.setDitta(val);
+}
+
+setCliente(val: string) {
+  this.cliente = val;
+  this.prevSrv.setCliente(val);
+}
+
 }
