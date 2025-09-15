@@ -1,13 +1,17 @@
 {
   "name": "preventivi-app",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:preventivi-app": "node dist/preventivi-app/server/server.mjs"
+    "serve:ssr:preventivi-app": "node dist/preventivi-app/server/server.mjs",
+    "build:prod": "ng build --configuration production",
+    "electron": "electron .",
+    "dist": "ng build --configuration production && electron-builder --mac"
   },
   "prettier": {
     "printWidth": 100,
@@ -50,6 +54,8 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
     "@types/uuid": "^10.0.0",
+    "electron": "^38.1.0",
+    "electron-builder": "^26.0.12",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
