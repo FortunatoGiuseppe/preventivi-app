@@ -14,17 +14,17 @@
 </div>
 
 <!-- Lista suggerimenti -->
+<div style="overflow-y: auto;">
 
-<div class="grid">
-  <mat-card class="card" *ngFor="let s of suggerimenti$ | async">
-    <div class="row">
-      <input matInput [(ngModel)]="s.descrizione" (blur)="modifica(s)">
-      <input matInput type="number" [(ngModel)]="s.prezzoUnitario" (blur)="modifica(s)">
-      <button mat-icon-button color="warn" (click)="elimina(s.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+  <div class="grid">
+    <mat-card class="card" *ngFor="let s of suggerimenti$ | async">
+      <div class="row">
+        <input matInput [(ngModel)]="s.descrizione" (blur)="modifica(s)">
+        <input matInput type="number" [(ngModel)]="s.prezzoUnitario" (blur)="modifica(s)">
 
-    <button mat-raised-button color="primary" (click)="add(s.id, s)">Aggiungi al preventivo</button>
-  </mat-card>
+      </div>
+
+      <button mat-raised-button color="primary" (click)="add(s.id, s)">Aggiungi al preventivo</button>
+    </mat-card>
+  </div>
 </div>
