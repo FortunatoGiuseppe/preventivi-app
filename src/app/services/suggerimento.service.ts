@@ -8,8 +8,8 @@ export class SuggerimentiService {
   private readonly defaults: Suggerimento[] = [
     { id: 'punto-luce', descrizione: 'Punto luce', prezzoUnitario: 35, quantitaDefault: 1 },
     { id: 'punto-presa', descrizione: 'Punto presa', prezzoUnitario: 40, quantitaDefault: 1 },
-    { id: 'deviazione',  descrizione: 'Deviazione',  prezzoUnitario: 50, quantitaDefault: 1 },
-    { id: 'int-bip',     descrizione: 'Interruttore bipolare', prezzoUnitario: 45, quantitaDefault: 1 },
+    { id: 'deviazione',  descrizione: 'Punto Deviato',  prezzoUnitario: 50, quantitaDefault: 1 },
+    { id: 'int-bip',     descrizione: 'Punto bipolare', prezzoUnitario: 45, quantitaDefault: 1 },
     { id: 'quadro',      descrizione: 'Quadro elettrico modulare', prezzoUnitario: 180, quantitaDefault: 1 },
   ];
 

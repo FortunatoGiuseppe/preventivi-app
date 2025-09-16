@@ -4,8 +4,11 @@
   gap: .75rem;
 }
 .card { padding-bottom: .5rem; }
-.row { display:flex; justify-content: space-between; align-items: baseline; margin-bottom: .5rem; }
-.title { font-weight: 600; }
+.row { 
+    display: grid;
+    grid-template-columns: 1fr 80px auto;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: .5rem;
+}.title { font-weight: 600; }
 .price { opacity: .8; }
-.qty {  margin-right: .5rem; }
-button { width: 100%; }
